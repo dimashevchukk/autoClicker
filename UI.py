@@ -1,4 +1,3 @@
-import threading
 import tkinter as tk
 
 
@@ -9,13 +8,13 @@ class App:
 
         self.root = root
         self.root.title("AutoClicker")
-        self.root.geometry("350x400")
+        self.root.geometry("300x150")
         self.root.resizable(False, False)
 
-        self.start_button = tk.Button(root, text="Start", command=self.toggle_clicker)
+        self.start_button = tk.Button(root, text="Start", width=20, height=2, command=self.toggle_clicker)
         self.start_button.pack(side=tk.TOP, pady=20)
 
-        self.settings_button = tk.Button(root, text="Settings", command=self.open_settings_window)
+        self.settings_button = tk.Button(root, text="Settings", width=10, command=self.open_settings_window)
         self.settings_button.pack(side=tk.TOP, pady=10)
 
     def toggle_clicker(self):
@@ -33,7 +32,6 @@ class App:
         settings_window.title("Settings")
         settings_window.geometry("300x150")
 
-        # Контейнер для горизонтального розміщення
         frame = tk.Frame(settings_window)
         frame.pack(pady=10, padx=10)
 
@@ -48,7 +46,8 @@ class App:
                 new_interval = float(interval_entry.get())
                 self.clicker.change_interval(new_interval)
             except ValueError:
-                pass  # Ігноруємо некоректні значення
+                pass
+            settings_window.destroy()
 
         save_button = tk.Button(settings_window, text="Save", command=save_settings)
         save_button.pack(pady=10)
